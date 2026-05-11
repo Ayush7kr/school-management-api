@@ -40,15 +40,15 @@ The School Management API System addresses a common geolocation requirement: ide
 
 ### Swagger Documentation
 The fully interactive Swagger UI interface where endpoints can be securely tested.
-![Swagger Documentation](images/Swagger.png)
+![Swagger Documentation](images/swagger.png)
 
 ### Add School API (Postman)
 Successfully registering a new school payload via Postman.
-![Add School API](images/add%20school.png)
+![Add School API](images/add-school.png)
 
 ### List Schools API (Postman)
 Fetching and dynamically sorting all facilities based on the provided user coordinates.
-![List Schools API](images/get%20school.png)
+![List Schools API](images/get-school.png)
 
 ---
 
