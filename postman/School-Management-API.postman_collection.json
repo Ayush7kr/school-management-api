@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "b3e34b5c-44b2-4d26-a079-58b29f0322df",
+		"name": "School-Management-API",
+		"description": "Postman Collection for School Management API project including addSchool and listSchools endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add School",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"ABC School\",\n    \"address\": \"Pune Maharashtra\",\n    \"latitude\": 18.5204,\n    \"longitude\": 73.8567\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/addSchool",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"addSchool"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Schools",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/listSchools?latitude=18.5204&longitude=73.8567&page=1&limit=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"listSchools"
+					],
+					"query": [
+						{
+							"key": "latitude",
+							"value": "18.5204"
+						},
+						{
+							"key": "longitude",
+							"value": "73.8567"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "radius",
+							"value": "15",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "ABC",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
