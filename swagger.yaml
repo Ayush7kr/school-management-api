@@ -4,8 +4,8 @@ info:
   description: API for managing schools and finding the nearest ones based on user location.
   version: 1.0.0
 servers:
-  - url: http://localhost:5000/api/v1
-    description: Local development server
+  - url: https://school-management-api-flgy.onrender.com/api/v1
+    description: Production server
 paths:
   /addSchool:
     post:
