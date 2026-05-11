@@ -151,12 +151,26 @@ The system operates seamlessly across a distributed cloud environment:
 
 ---
 
-## 🧪 Integration Testing Protocol
-1. Launch an API client such as Postman or Thunder Client.
-2. Import the provided `School-Management-API.postman_collection.json` file located in the `postman/` directory. All URLs within this collection are strictly pre-configured to point to the live Render deployment.
-3. Execute the **Add School** request to provision initial test data into the Railway database.
-4. Execute the **List Schools** request to validate the real-time distance calculation mechanisms.
-5. Alternatively, access [Swagger Docs](https://school-management-api-flgy.onrender.com/api-docs) via a web browser to utilize the interactive UI.
+## 📬 API Testing with Postman
+
+A complete Postman collection is included for easy API testing and evaluation.
+
+Collection File:
+postman/School-Management-API.postman_collection.json
+
+The collection contains pre-configured requests for:
+- Health Check Endpoint
+- Add School Endpoint
+- List Schools Endpoint
+
+### Steps to Import
+1. Open Postman
+2. Click on Import
+3. Choose the exported collection JSON file
+4. Run the APIs directly
+
+### Live API Base URL
+https://school-management-api-flgy.onrender.com
 
 ---
 
