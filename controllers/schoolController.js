@@ -1,4 +1,4 @@
-const pool = require('../config/db');
+const { pool } = require('../config/db');
 const { calculateDistance } = require('../utils/distanceCalculator');
 const { sendResponse } = require('../utils/responseFormatter');
 const { HTTP_STATUS, PAGINATION } = require('../utils/constants');

@@ -13,7 +13,7 @@ const healthRoutes = require('./routes/healthRoutes');
 
 // Import middleware
 const errorMiddleware = require('./middleware/errorMiddleware');
-const pool = require('./config/db');
+const { connectDB } = require('./config/db'); // Imported the dedicated connection tester
 
 const app = express();
 
@@ -51,20 +51,19 @@ app.use(errorMiddleware);
 
 const PORT = process.env.PORT || 5000;
 
-// Test DB Connection and Start Server
+// Initialize Server after verifying Database Connection
 const startServer = async () => {
   try {
-    // Check if the pool is connected correctly by grabbing a connection
-    const connection = await pool.getConnection();
-    console.log('✅ Connected to MySQL database successfully');
-    connection.release();
+    // 1. Verify DB Connection FIRST
+    await connectDB();
 
+    // 2. Start the Express App
     app.listen(PORT, () => {
       console.log(`🚀 Server is running on port ${PORT}`);
     });
   } catch (error) {
-    console.error('❌ Failed to connect to the database:', error.message);
-    process.exit(1); // Exit process with failure
+    console.error('❌ Server failed to start due to database connection error.');
+    process.exit(1); // Exit immediately if DB connection fails
   }
 };
 
