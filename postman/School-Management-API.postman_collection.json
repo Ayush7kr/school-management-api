@@ -12,12 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/",
-					"protocol": "http",
+					"raw": "https://school-management-api-flgy.onrender.com/",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"school-management-api-flgy",
+						"onrender",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						""
 					]
@@ -41,12 +42,13 @@
 					"raw": "{\n    \"name\": \"ABC School\",\n    \"address\": \"Pune Maharashtra\",\n    \"latitude\": 18.5204,\n    \"longitude\": 73.8567\n}"
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/addSchool",
-					"protocol": "http",
+					"raw": "https://school-management-api-flgy.onrender.com/api/v1/addSchool",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"school-management-api-flgy",
+						"onrender",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"api",
 						"v1",
@@ -62,12 +64,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/listSchools?latitude=18.5204&longitude=73.8567&page=1&limit=10",
-					"protocol": "http",
+					"raw": "https://school-management-api-flgy.onrender.com/api/v1/listSchools?latitude=18.5204&longitude=73.8567&page=1&limit=10",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"school-management-api-flgy",
+						"onrender",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"api",
 						"v1",

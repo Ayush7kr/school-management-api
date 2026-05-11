@@ -1,8 +1,19 @@
 # School Management API System 🏫
 
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com/)
+[![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://swagger.io/)
+[![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://render.com/)
+
 The School Management API System is a production-ready RESTful service built with Node.js, Express.js, and MySQL. This API enables client applications to securely store school facility data and retrieve intelligent, geolocation-based facility lists sorted by proximity to any given set of geographic coordinates.
 
-![Screenshot Placeholder](https://via.placeholder.com/800x400?text=App+Screenshot+Here)
+---
+
+## 🌐 Live Application Links
+
+- **Live API Base URL**: [https://school-management-api-flgy.onrender.com](https://school-management-api-flgy.onrender.com)
+- **Interactive API Documentation (Swagger)**: [https://school-management-api-flgy.onrender.com/api-docs](https://school-management-api-flgy.onrender.com/api-docs)
 
 ---
 
@@ -15,13 +26,29 @@ The School Management API System addresses a common geolocation requirement: ide
 - **Advanced Querying**: Supports standard pagination (`page`, `limit`), case-insensitive name searching, and dynamic radius filtering.
 - **Robust Architecture**: Built upon the Model-View-Controller (MVC) architectural pattern with a highly modular folder structure.
 - **Security & Reliability**: Incorporates Helmet for HTTP header security, CORS configuration, Morgan for request logging, and centralized global error handling.
-- **API Documentation**: Integrated Swagger UI available at `/api-docs` for seamless testing and schema validation.
 
 ## 🛠️ Technology Stack
-- **Backend:** Node.js, Express.js
-- **Database:** MySQL
+- **Backend Environment:** Node.js
+- **Web Framework:** Express.js
+- **Database:** MySQL (Hosted on Railway)
+- **Deployment Platform:** Render
 - **Libraries:** mysql2, dotenv, cors, express-validator, helmet, morgan, swagger-ui-express
-- **Development Tools:** nodemon
+
+---
+
+## 📸 Screenshots
+
+### Swagger Documentation
+The fully interactive Swagger UI interface where endpoints can be securely tested.
+![Swagger Documentation](images/Swagger.png)
+
+### Add School API (Postman)
+Successfully registering a new school payload via Postman.
+![Add School API](images/add%20school.png)
+
+### List Schools API (Postman)
+Fetching and dynamically sorting all facilities based on the provided user coordinates.
+![List Schools API](images/get%20school.png)
 
 ---
 
@@ -32,8 +59,9 @@ school-management-api/
 ├── config/             # Database connection pooling and environmental configuration
 ├── controllers/        # Core business logic for all API endpoints
 ├── database/           # SQL schema definitions for table creation
+├── images/             # Documentation screenshots
 ├── middleware/         # Centralized error handling and request validation layers
-├── postman/            # Exported Postman collection for QA and integration testing
+├── postman/            # Exported Postman collection targeting the live production URL
 ├── routes/             # API routing definitions
 ├── utils/              # Shared utilities (constants, Haversine calculator, response formatter)
 ├── .env                # Environment-specific variables
@@ -44,38 +72,34 @@ school-management-api/
 
 ---
 
-## 💻 Installation & Setup Instructions
+## 💻 Installation & Local Setup Instructions
 
 ### 1. System Requirements
 - Node.js runtime environment installed on the host machine.
-- MySQL server installed and accessible.
+- Local MySQL server or an external remote database (e.g., Railway).
 
 ### 2. Initialization Commands
-Execute the following commands in the terminal to initialize the service:
+Execute the following commands in the terminal to initialize the service locally:
 ```bash
-# Navigate to the project directory
+# Clone the repository and navigate to the project directory
 cd school-management-api
 
-# Install required dependencies
+# Install all required dependencies
 npm install
 
 # Start the application in development mode
 npm run dev
 ```
 
-### 3. Database Provisioning
-1. Access the MySQL environment via Workbench or CLI.
-2. Locate the `database/schema.sql` file within the repository.
-3. Execute the provided SQL queries to generate the `school_management` database and the corresponding `schools` table.
-
-### 4. Environment Configuration
-Create a `.env` file in the project root directory containing the following configuration keys (modify the credentials to match the target database):
+### 3. Environment Configuration
+Create a `.env` file in the project root directory containing the following configuration keys:
 ```env
 PORT=5000
-DB_HOST=localhost
+DB_HOST=viaduct.proxy.rlwy.net
+DB_PORT=53960
 DB_USER=root
 DB_PASSWORD=your_secure_password
-DB_NAME=school_management
+DB_NAME=railway
 ```
 
 ---
@@ -88,25 +112,10 @@ DB_NAME=school_management
 - **Request Payload:**
 ```json
 {
-  "name": "ABC School",
+  "name": "Delhi Public School",
   "address": "Pune Maharashtra",
   "latitude": 18.5204,
   "longitude": 73.8567
-}
-```
-- **Expected Success Response (201 Created):**
-```json
-{
-  "success": true,
-  "message": "School added successfully",
-  "timestamp": "2026-05-11T12:00:00.000Z",
-  "data": {
-    "id": 1,
-    "name": "ABC School",
-    "address": "Pune Maharashtra",
-    "latitude": 18.5204,
-    "longitude": 73.8567
-  }
 }
 ```
 
@@ -114,106 +123,66 @@ DB_NAME=school_management
 - **Endpoint:** `GET /api/v1/listSchools`
 - **Query Parameters:** `latitude` (required), `longitude` (required), `page` (optional), `limit` (optional), `name` (optional), `radius` (optional)
 - **Example Request:** `GET /api/v1/listSchools?latitude=18.5204&longitude=73.8567&page=1&limit=5`
-- **Expected Success Response (200 OK):**
-```json
-{
-  "success": true,
-  "message": "Schools retrieved successfully",
-  "timestamp": "2026-05-11T12:05:00.000Z",
-  "count": 1,
-  "pagination": {
-    "total": 1,
-    "page": 1,
-    "limit": 5,
-    "totalPages": 1
-  },
-  "data": [
-    {
-      "id": 1,
-      "name": "ABC School",
-      "address": "Pune Maharashtra",
-      "latitude": 18.5204,
-      "longitude": 73.8567,
-      "distance_in_km": 0
-    }
-  ]
-}
-```
 
 ---
 
-## 🔍 Implementation Details
+## 🔍 Implementation & System Logic Explained
 
-### Distance Calculation Algorithm
-Because the Earth is a sphere, simple geometric equations cannot accurately determine geographical distance. The system implements the **Haversine formula** to determine the "great-circle" distance between two coordinate pairs. The algorithm converts decimal degrees to radians and applies the formula against the Earth's radius (6371 km) to yield precise distances in kilometers. This implementation is encapsulated within the `utils/distanceCalculator.js` utility.
+### 1. Distance Calculation Algorithm (Haversine Formula)
+Because the Earth is a sphere, simple geometric equations cannot accurately determine geographical distance. The system implements the **Haversine formula** to determine the "great-circle" distance between two coordinate pairs. The algorithm converts decimal degrees to radians and applies the formula against the Earth's radius (6371 km) to yield precise distances in kilometers. This logic is strictly encapsulated within the `utils/distanceCalculator.js` utility module.
 
-### Data Filtering & Pagination Workflow
-1. **Search Protocol**: Queries containing the `name` parameter utilize the SQL `LIKE` operator to perform partial string matching (`%keyword%`).
-2. **Radius Filtering**: Following the extraction of records and calculation of relative distances, the application applies an in-memory filter to exclude any facilities falling outside the requested radial boundary.
-3. **Pagination Logic**: After the data set is strictly sorted by ascending distance, the system applies mathematical array slicing boundaries based on the requested `page` and `limit` parameters to deliver the exact requested subset.
+### 2. Validation Subsystem
+The application heavily utilizes `express-validator` to intercept malformed data payloads before they ever reach the controller or database layers. The validation middleware strictly ensures:
+- Both `latitude` (-90 to 90) and `longitude` (-180 to 180) exist within realistic geographical boundaries.
+- String payloads (such as `name` and `address`) are automatically trimmed and verified for emptiness.
+
+### 3. Data Filtering & Pagination Workflow
+- **Search Protocol**: Queries containing the `name` parameter utilize the SQL `LIKE` operator to perform partial string matching (`%keyword%`).
+- **Radius Filtering**: Following the extraction of records and calculation of relative distances, the application applies an in-memory filter to instantly exclude any facilities falling outside the user-requested maximum `radius`.
+- **Pagination Logic**: After the data set is securely sorted by ascending distance, the system calculates standard `startIndex` and `endIndex` boundaries based on the requested `page` and `limit` parameters to deliver precisely formatted data chunks, alongside comprehensive pagination metadata (`total`, `totalPages`, etc).
+
+### 4. Global Error Handling
+The application replaces standard Express crash traces with a centralized error handling middleware (`middleware/errorMiddleware.js`). Any thrown exceptions or database failures are captured globally, standardized into the exact same JSON format as successful responses (`success`, `message`, `errors`), and delivered safely to the client. This guarantees clients always receive predictable, parseable data rather than raw HTML traces.
+
+### 5. Production Deployment Architecture
+The system operates seamlessly across a distributed cloud environment:
+- **Application Host (Render)**: The Node.js application is deployed as a Web Service on Render, securely retrieving environment secrets at runtime and exposing a public HTTPS URL.
+- **Database Host (Railway)**: The MySQL relational database is provisioned on Railway. The application specifically utilizes `mysql2`'s connection pooling alongside injected `DB_PORT` handling and `rejectUnauthorized: false` SSL configurations to successfully bypass strict cloud connectivity firewalls.
 
 ---
 
 ## 🧪 Integration Testing Protocol
 1. Launch an API client such as Postman or Thunder Client.
-2. Import the provided `School-Management-API.postman_collection.json` file located in the `postman/` directory.
-3. Execute the **Add School** request to provision initial test data.
-4. Execute the **List Schools** request to validate the distance calculation and sorting algorithms.
-5. Alternatively, access `http://localhost:5000/api-docs` via a web browser to utilize the interactive Swagger UI.
-
----
-
-## 🌐 Deployment Guidelines
-
-### Application Hosting (Render)
-1. Establish a new Web Service on [Render](https://render.com) linked to the application repository.
-2. Define the **Build Command** as: `npm install`
-3. Define the **Start Command** as: `npm start`
-4. Configure the necessary environmental variables matching the `.env` schema. Note: A remote database connection string is required.
-
-### Database Hosting (Railway)
-1. Provision a new MySQL instance via [Railway](https://railway.app).
-2. Extract the generated connection credentials (Host, User, Password, DB Name).
-3. Inject these credentials into the application host's environment variables.
+2. Import the provided `School-Management-API.postman_collection.json` file located in the `postman/` directory. All URLs within this collection are strictly pre-configured to point to the live Render deployment.
+3. Execute the **Add School** request to provision initial test data into the Railway database.
+4. Execute the **List Schools** request to validate the real-time distance calculation mechanisms.
+5. Alternatively, access [Swagger Docs](https://school-management-api-flgy.onrender.com/api-docs) via a web browser to utilize the interactive UI.
 
 ---
 
 ## 🛠️ Troubleshooting & Issue Resolution
 
-If an issue is encountered while running or testing the API, refer to the following common scenarios and their designated resolutions:
+If an issue is encountered while running or testing the API locally, refer to the following common scenarios:
 
 ### 1. Database Connection Failure (`ECONNREFUSED` or Access Denied)
 - **Symptom:** The terminal outputs a `Failed to connect to the database` error during startup.
 - **Action Required:**
-  - Verify that the local MySQL service is actively running.
-  - Cross-reference the credentials defined in the `.env` file (`DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_NAME`) against the actual database configuration.
-  - Ensure the `database/schema.sql` script has been successfully executed prior to application launch.
+  - Verify that the target MySQL service is actively running and remotely accessible.
+  - Cross-reference the credentials defined in the `.env` file (`DB_PORT`, `DB_PASSWORD`, `DB_HOST`, `DB_NAME`) against the Railway configuration.
 
-### 2. Request Rejection: Route Not Found (404)
-- **Symptom:** The API returns a `404 Not Found` response with the message `Route not found`.
-- **Action Required:**
-  - Verify the request URL path. All core endpoints must be prefixed with the exact API versioning path: `/api/v1/`. 
-  - *Example:* Ensure the request is targeting `http://localhost:5000/api/v1/listSchools` rather than `http://localhost:5000/listSchools`.
-
-### 3. Request Rejection: Validation Failed (400 Bad Request)
+### 2. Request Rejection: Validation Failed (400 Bad Request)
 - **Symptom:** The API rejects the payload with a `Validation failed` message and an array of specific errors.
 - **Action Required:**
-  - **For POST Requests:** Ensure the `Content-Type` header is strictly set to `application/json`. Verify that the payload contains all required fields (`name`, `address`, `latitude`, `longitude`) and that the coordinates fall within valid geographic ranges (Latitude: -90 to 90, Longitude: -180 to 180).
-  - **For GET Requests:** Ensure both `latitude` and `longitude` query parameters are actively provided in the URL string, as they are strictly required to perform distance calculations.
+  - Ensure the `Content-Type` header is strictly set to `application/json` in your testing client. Verify that the coordinates strictly fall within valid geographic numerical boundaries.
 
-### 4. Data Conflict: Duplicate Resource (409 Conflict)
+### 3. Data Conflict: Duplicate Resource (409 Conflict)
 - **Symptom:** Attempting to add a school returns a `409 Conflict` stating the school already exists.
 - **Action Required:**
-  - The API prevents the creation of duplicate records based on exact coordinate and name matching. If testing, either slightly alter the coordinates or the name of the facility in the payload.
-
-### 5. Unexpected Server Errors (500 Internal Server Error)
-- **Symptom:** The API crashes or returns a generic 500 status.
-- **Action Required:**
-  - Inspect the application terminal logs. The global error handling middleware will catch and print the exact stack trace to the console, detailing whether the issue stems from a malformed SQL query or an undefined variable.
+  - The API prevents the creation of duplicate records based on exact coordinate and name matching logic. To proceed, slightly alter the coordinates or the name of the facility in the JSON payload.
 
 ---
 
 ## 🔮 Roadmap & Enhancements
-- Implementation of Redis caching layers to optimize latency on high-frequency `listSchools` queries.
-- Integration of robust JWT-based authorization for administrative POST operations.
-- Development of a cohesive frontend client built on modern reactive frameworks.
+- Implementation of robust Redis caching layers to drastically optimize latency on high-frequency geospatial queries.
+- Integration of secure JWT-based authorization guardrails for administrative `POST` operations.
+- Development of a cohesive, reactive frontend client interface using modern frameworks such as Next.js or React.
